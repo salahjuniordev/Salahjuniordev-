@@ -1,9 +1,13 @@
 import { useEffect, useState, useMemo } from "react";
 import { useLanguage } from "@/lib/language";
+import { supabase } from "@/integrations/supabase/client";
 
-const portrait1 = "/hero-portrait.png";
-const portrait2 = "/hero-portrait-2.png";
-const mobilePortraits = ["/hero-mobile-1.webp", "/hero-mobile-2.webp"];
+/** Fallbacks shown until/unless the admin uploads hero images in the dashboard. */
+const DEFAULT_DESKTOP = ["/hero-portrait.png", "hero-portrait-2.png"];
+const DEFAULT_MOBILE = ["/hero-mobile-1.webp", "/hero-mobile-2.webp"];
+
+/** Row shape of the admin-managed hero_images table. */
+type HeroImage = { id: string; url: string; device: "desktop" | "mobile" | "both" };
 
 /** Types out `text` one character at a time once `start` is true. */
 function useTyped(text: string, start: boolean, speed = 55) {
@@ -37,7 +41,38 @@ const stack = [
 
 export function Hero() {
   const { t } = useLanguage();
-  const images = useMemo(() => [portrait1, portrait2], []);
+
+  // Hero portraits are managed from Admin → Hero Images (hero_images table).
+  const [dbImages, setDbImages] = useState<HeroImage[]>([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await (supabase.from("hero_images" as any) as any)
+          .select("id,url,device,order_index,published")
+          .eq("published", true)
+          .order("order_index", { ascending: true });
+        if (data && data.length > 0) setDbImages(data as HeroImage[]);
+      } catch {
+        /* table may not exist yet — fallbacks still render */
+      }
+    })();
+  }, []);
+
+  const images = useMemo(
+    () =>
+      dbImages.length
+        ? dbImages.filter((d) => d.device !== "mobile").map((d) => d.url)
+        : DEFAULT_DESKTOP,
+    [dbImages],
+  );
+  const mobilePortraits = useMemo(
+    () =>
+      dbImages.length
+        ? dbImages.filter((d) => d.device !== "desktop").map((d) => d.url)
+        : DEFAULT_MOBILE,
+    [dbImages],
+  );
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {

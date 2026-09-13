@@ -25,6 +25,7 @@ import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminServicesRouteImport } from './routes/admin/services'
 import { Route as AdminProjectsRouteImport } from './routes/admin/projects'
 import { Route as AdminPricingRouteImport } from './routes/admin/pricing'
+import { Route as AdminHeroImagesRouteImport } from './routes/admin/hero-images'
 import { Route as AdminBlogRouteImport } from './routes/admin/blog'
 import { Route as AdminActivityRouteImport } from './routes/admin/activity'
 
@@ -108,6 +109,11 @@ const AdminPricingRoute = AdminPricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminHeroImagesRoute = AdminHeroImagesRouteImport.update({
+  id: '/hero-images',
+  path: '/hero-images',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBlogRoute = AdminBlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/terms-conditions': typeof TermsConditionsRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/blog': typeof AdminBlogRoute
+  '/admin/hero-images': typeof AdminHeroImagesRoute
   '/admin/pricing': typeof AdminPricingRoute
   '/admin/projects': typeof AdminProjectsRoute
   '/admin/services': typeof AdminServicesRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/terms-conditions': typeof TermsConditionsRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/blog': typeof AdminBlogRoute
+  '/admin/hero-images': typeof AdminHeroImagesRoute
   '/admin/pricing': typeof AdminPricingRoute
   '/admin/projects': typeof AdminProjectsRoute
   '/admin/services': typeof AdminServicesRoute
@@ -170,6 +178,7 @@ export interface FileRoutesById {
   '/terms-conditions': typeof TermsConditionsRoute
   '/admin/activity': typeof AdminActivityRoute
   '/admin/blog': typeof AdminBlogRoute
+  '/admin/hero-images': typeof AdminHeroImagesRoute
   '/admin/pricing': typeof AdminPricingRoute
   '/admin/projects': typeof AdminProjectsRoute
   '/admin/services': typeof AdminServicesRoute
@@ -192,6 +201,7 @@ export interface FileRouteTypes {
     | '/terms-conditions'
     | '/admin/activity'
     | '/admin/blog'
+    | '/admin/hero-images'
     | '/admin/pricing'
     | '/admin/projects'
     | '/admin/services'
@@ -211,6 +221,7 @@ export interface FileRouteTypes {
     | '/terms-conditions'
     | '/admin/activity'
     | '/admin/blog'
+    | '/admin/hero-images'
     | '/admin/pricing'
     | '/admin/projects'
     | '/admin/services'
@@ -231,6 +242,7 @@ export interface FileRouteTypes {
     | '/terms-conditions'
     | '/admin/activity'
     | '/admin/blog'
+    | '/admin/hero-images'
     | '/admin/pricing'
     | '/admin/projects'
     | '/admin/services'
@@ -368,6 +380,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPricingRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/hero-images': {
+      id: '/admin/hero-images'
+      path: '/hero-images'
+      fullPath: '/admin/hero-images'
+      preLoaderRoute: typeof AdminHeroImagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/blog': {
       id: '/admin/blog'
       path: '/blog'
@@ -388,6 +407,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminActivityRoute: typeof AdminActivityRoute
   AdminBlogRoute: typeof AdminBlogRoute
+  AdminHeroImagesRoute: typeof AdminHeroImagesRoute
   AdminPricingRoute: typeof AdminPricingRoute
   AdminProjectsRoute: typeof AdminProjectsRoute
   AdminServicesRoute: typeof AdminServicesRoute
@@ -399,6 +419,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminActivityRoute: AdminActivityRoute,
   AdminBlogRoute: AdminBlogRoute,
+  AdminHeroImagesRoute: AdminHeroImagesRoute,
   AdminPricingRoute: AdminPricingRoute,
   AdminProjectsRoute: AdminProjectsRoute,
   AdminServicesRoute: AdminServicesRoute,
