@@ -30,7 +30,7 @@ export function Pricing({ initial }: { initial?: Tables<"pricing_tiers">[] }) {
           {plans.map((p, idx) => {
             const features = Array.isArray(p.features) ? (p.features as string[]) : [];
             const name = (p.name || "").toLowerCase();
-            const icon = name.includes("premium") || name.includes("prem")
+            const icon = name.includes("premium") || name.includes("prem") || name.includes("enterprise") || name.includes("entreprise")
               ? "fa-crown"
               : name.includes("medium") || name.includes("moyen") || name.includes("pro")
               ? "fa-star"

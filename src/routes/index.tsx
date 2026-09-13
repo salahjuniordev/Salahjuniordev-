@@ -11,6 +11,7 @@ import { Numbers } from "@/components/site/Numbers";
 import { Portfolio } from "@/components/site/Portfolio";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Blog } from "@/components/site/Blog";
+import { Ebooks } from "@/components/site/Ebooks";
 import { Pricing } from "@/components/site/Pricing";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
@@ -77,6 +78,7 @@ function IndexInner() {
         <Portfolio initial={data?.projects} />
         <Testimonials initial={data?.testimonials} />
         <Blog initial={data?.posts} />
+        <Ebooks />
         <Pricing initial={data?.pricing} />
         <Contact />
       </main>

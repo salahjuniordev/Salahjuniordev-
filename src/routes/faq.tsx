@@ -94,8 +94,8 @@ const categories: Cat[] = [
       {
         q: ["Do you offer post-launch support?", "Proposez-vous un support post-lancement ?"],
         a: [
-          "Yes! My Premium plan includes 2 months of free post-launch support. All other plans include 30 days. Extended maintenance packages are available.",
-          "Oui ! Le forfait Premium inclut 2 mois de support gratuit. Les autres forfaits en incluent 30 jours. Des packages de maintenance étendue sont disponibles.",
+          "Yes! My Enterprise plan includes 2 months of free post-launch support. All other plans include 30 days. Extended maintenance packages are available.",
+          "Oui ! Le forfait Entreprise inclut 2 mois de support gratuit. Les autres forfaits en incluent 30 jours. Des packages de maintenance étendue sont disponibles.",
         ],
       },
       {

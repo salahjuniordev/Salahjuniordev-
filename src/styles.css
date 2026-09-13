@@ -1247,6 +1247,104 @@ textarea.contact-field { resize: vertical; min-height: 130px; }
 }
 @keyframes tw-blink { 50% { opacity: 0; } }
 
+/* ── Ebooks ───────────────────────────────────────────────────── */
+.ebook-card {
+  display: flex;
+  flex-direction: column;
+  background: #0b1626;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.ebook-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(155, 250, 6, 0.4);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+}
+.ebook-cover {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(160deg, #12203a 0%, #07101f 100%);
+  overflow: hidden;
+}
+.ebook-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.ebook-card:hover .ebook-cover img { transform: scale(1.05); }
+.ebook-cover-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: rgba(155, 250, 6, 0.4);
+  font-size: 44px;
+}
+.ebook-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--brand);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+.ebook-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px 22px 24px;
+}
+.ebook-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+.ebook-desc {
+  font-size: 14px;
+  color: #8fa0b5;
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+.ebook-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+.ebook-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--brand);
+}
+.ebook-buy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--brand);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.ebook-buy-btn:hover {
+  background: var(--brand-ink);
+  transform: translateY(-2px);
+}
+
 /* ── WhatsApp floating button ──────────────────────────────── */
 .whatsapp-float {
   position: fixed;
