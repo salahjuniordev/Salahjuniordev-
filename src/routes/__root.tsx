@@ -111,6 +111,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "icon", href: "/pwa-192.png", type: "image/png", sizes: "192x192" },
       // Warm up the third-party origins the page pulls assets from.
       { rel: "preconnect", href: "https://res.cloudinary.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://cdnjs.cloudflare.com", crossOrigin: "anonymous" },
@@ -143,13 +144,58 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* iOS home-screen icon + PWA splash feel */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <style>{`
+          /* Branded loading screen: navy backdrop, logo pulse, fades out on app mount */
+          .boot-splash {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: grid;
+            place-items: center;
+            background: #07101f;
+            transition: opacity 450ms ease, visibility 450ms ease;
+          }
+          .boot-splash img {
+            width: 96px;
+            height: 96px;
+            animation: boot-pulse 1.4s ease-in-out infinite;
+          }
+          @keyframes boot-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.88); opacity: 0.7; }
+          }
+          .boot-splash.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+        `}</style>
       </head>
       <body>
+        <div id="boot-splash" className="boot-splash" aria-hidden="true">
+          <img src="/logo.png" alt="" width={96} height={96} />
+        </div>
         {children}
         <Scripts />
       </body>
     </html>
   );
+}
+
+/** Removes the static splash once React has mounted (or after a safety timeout). */
+function BootSplash() {
+  useEffect(() => {
+    const el = document.getElementById("boot-splash");
+    if (!el) return;
+    const done = () => {
+      el.classList.add("is-done");
+      window.setTimeout(() => el.remove(), 600);
+    };
+    // Small delay so the first paint of the app is visible before the fade.
+    const t = window.setTimeout(done, 350);
+    return () => window.clearTimeout(t);
+  }, []);
+  return null;
 }
 
 function RootComponent() {
@@ -158,6 +204,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <BootSplash />
         <Outlet />
         <Toaster theme="dark" position="top-right" richColors />
       </AuthProvider>
