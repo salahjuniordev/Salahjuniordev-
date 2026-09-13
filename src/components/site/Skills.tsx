@@ -19,6 +19,13 @@ const webTech: Array<{ label: string; src?: string; badge?: string; bg?: string;
 
 export function Skills() {
   const { t } = useLanguage();
+  const uiUxItems = [
+    { en: "User Research", fr: "Recherche Utilisateur" },
+    { en: "Wireframing", fr: "Wireframing" },
+    { en: "Prototyping", fr: "Prototypage" },
+    { en: "Interaction Design", fr: "Design d'Interaction" },
+    { en: "Usability Testing", fr: "Tests d'Utilisabilité" },
+  ];
   return (
     <section className="section-padding bg-[#07101f]">
       <div className="container-sj">
@@ -54,8 +61,8 @@ export function Skills() {
                 {t("Designing intuitive and engaging user experiences that are both beautiful and functional.", "Concevoir des expériences utilisateur intuitives et engageantes à la fois belles et fonctionnelles.")}
               </p>
               <ul className="grid grid-cols-2 gap-2 text-sm text-slate-200">
-                {["User Research", "Wireframing", "Prototyping", "Interaction Design", "Usability Testing"].map((u) => (
-                  <li key={u} className="flex items-center gap-2"><i className="fa-solid fa-check text-[--brand] text-xs" />{u}</li>
+                {uiUxItems.map((u) => (
+                  <li key={u.en} className="flex items-center gap-2"><i className="fa-solid fa-check text-[--brand] text-xs" />{t(u.en, u.fr)}</li>
                 ))}
               </ul>
             </div>
@@ -71,7 +78,7 @@ export function Skills() {
                 </div>
               </div>
               <div className="card-blue !p-5">
-                <h3 className="font-bold mb-2">CMS</h3>
+                <h3 className="font-bold mb-2">{t("CMS", "CMS")}</h3>
                 <p className="text-xs text-white/85 mb-3">{t("Building and managing dynamic websites with powerful CMS platforms.", "Construction et gestion de sites dynamiques avec de puissantes plateformes CMS.")}</p>
                 <div className="flex gap-2">
                   <div className="tech-badge"><img src={devicon("wordpress/wordpress-original.svg")} alt="WordPress" width={32} height={32} loading="lazy" decoding="async" /></div>
@@ -79,7 +86,7 @@ export function Skills() {
                 </div>
               </div>
               <div className="card-dark !p-5">
-                <h3 className="font-bold text-white mb-2">Microsoft Office</h3>
+                <h3 className="font-bold text-white mb-2">{t("Microsoft Office", "Microsoft Office")}</h3>
                 <p className="text-xs text-slate-400 mb-3">{t("Productive and efficient in creating documents, presentations, and spreadsheets.", "Productif dans la création de documents, présentations et tableurs.")}</p>
                 <div className="flex gap-2">
                   <Badge text="W" bg="#2B579A" border="#2B579A" label="Microsoft Word" />

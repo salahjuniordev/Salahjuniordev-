@@ -61,7 +61,7 @@ function ServiceDetailPage() {
     e.preventDefault();
     const phone = "237683693011";
     const text = encodeURIComponent(
-      `Hello Salah, I'm interested in your ${service!.title} service.\n\nName: ${form.name}\nEmail: ${form.email}\n\nProject details:\n${form.message}`
+      `${t("Hello Salah, I'm interested in your", "Bonjour Salah, je suis intéressé(e) par votre")} ${service!.title} ${t("service.", "service.")}\n\n${t("Name:", "Nom :")} ${form.name}\n${t("Email:", "E-mail :")} ${form.email}\n\n${t("Project details:", "Détails du projet :")}\n${form.message}`
     );
     window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
     setSubmitted(true);
@@ -88,7 +88,7 @@ function ServiceDetailPage() {
               )}
               <div className="svc-detail-actions">
                 <a
-                  href={`https://wa.me/237683693011?text=${encodeURIComponent(`Hello Salah, I'm interested in your ${service.title} service.`)}`}
+                  href={`https://wa.me/237683693011?text=${encodeURIComponent(`${t("Hello Salah, I'm interested in your", "Bonjour Salah, je suis intéressé(e) par votre")} ${service.title} ${t("service.", "service.")}`)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="svc-detail-btn svc-detail-btn-primary"

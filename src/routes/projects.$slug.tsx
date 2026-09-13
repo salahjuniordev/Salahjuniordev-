@@ -148,7 +148,7 @@ function ProjectDetailPage() {
             </p>
             <div className="svc-detail-actions justify-center">
               <a
-                href={`https://wa.me/237683693011?text=${encodeURIComponent(`Hello Salah, I saw the ${project.title} case study — I have a similar project in mind.`)}`}
+                href={`https://wa.me/237683693011?text=${encodeURIComponent(`${t("Hello Salah, I saw the", "Bonjour Salah, j'ai vu l'étude de cas")} ${project.title} — ${t("I have a similar project in mind.", "j'ai un projet similaire en tête.")}`)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="svc-detail-btn svc-detail-btn-primary"

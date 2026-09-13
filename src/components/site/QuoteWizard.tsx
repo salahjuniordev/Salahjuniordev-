@@ -42,7 +42,7 @@ export function QuoteWizard() {
     const svc = serviceTypes.find((s) => s.key === service);
     const b = budgets.find((x) => x.key === budget);
     const d = deadlines.find((x) => x.key === deadline);
-    const msg = `Hello Salah! I'd like a quote.\n\n• Project: ${svc ? t(svc.en, svc.fr) : "—"}\n• Budget: ${b ? b.label[lang === "fr" ? "fr" : "en"] : "—"}\n• Timeline: ${d ? d.label[lang === "fr" ? "fr" : "en"] : "—"}\n\nTell me more about the project:`;
+    const msg = `${t("Hello Salah! I'd like a quote.", "Bonjour Salah ! Je voudrais un devis.")}\n\n• ${t("Project:", "Projet :")} ${svc ? t(svc.en, svc.fr) : "—"}\n• ${t("Budget:", "Budget :")} ${b ? b.label[lang === "fr" ? "fr" : "en"] : "—"}\n• ${t("Timeline:", "Délai :")} ${d ? d.label[lang === "fr" ? "fr" : "en"] : "—"}\n\n${t("Tell me more about the project:", "Dites-m'en plus sur le projet :")}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
     setOpen(false);
     reset();
@@ -63,7 +63,7 @@ export function QuoteWizard() {
       {open && (
         <div className="qw-overlay" onClick={() => setOpen(false)}>
           <div className="qw-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="qw-close" onClick={() => { setOpen(false); reset(); }} aria-label="Close">
+            <button className="qw-close" onClick={() => { setOpen(false); reset(); }} aria-label={t("Close", "Fermer")}>
               <i className="fa-solid fa-xmark" />
             </button>
 

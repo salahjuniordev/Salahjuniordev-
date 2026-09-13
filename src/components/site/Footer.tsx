@@ -14,10 +14,10 @@ const quick = [
 ];
 
 const legal = [
-  { to: "/faq", label: "FAQs" },
-  { to: "/license-copyright", label: "License & Copyright" },
-  { to: "/refund-policy", label: "Refund Policy" },
-  { to: "/terms-conditions", label: "Terms & Conditions" },
+  { to: "/faq", en: "FAQs", fr: "FAQ" },
+  { to: "/license-copyright", en: "License & Copyright", fr: "Licence & Droits d'Auteur" },
+  { to: "/refund-policy", en: "Refund Policy", fr: "Politique de Remboursement" },
+  { to: "/terms-conditions", en: "Terms & Conditions", fr: "Conditions Générales" },
 ];
 
 export function Footer() {
@@ -82,7 +82,7 @@ export function Footer() {
             {legal.map((l) => (
               <li key={l.to}>
                 <Link to={l.to} className="hover:text-[--brand] inline-flex items-center gap-2">
-                  <i className="fa-solid fa-angle-right text-[--brand] text-xs" />{l.label}
+                  <i className="fa-solid fa-angle-right text-[--brand] text-xs" />{t(l.en, l.fr)}
                 </Link>
               </li>
             ))}
@@ -97,7 +97,7 @@ export function Footer() {
             </a>
           ))}
         </div>
-        <p className="text-xs text-slate-400 text-center">© {new Date().getFullYear()} <span className="text-white font-semibold">{brand}</span>. All Rights Reserved.</p>
+        <p className="text-xs text-slate-400 text-center">© {new Date().getFullYear()} <span className="text-white font-semibold">{brand}</span>. {t("All Rights Reserved.", "Tous Droits Réservés.")}</p>
       </div>
     </footer>
   );

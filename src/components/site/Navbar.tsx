@@ -44,7 +44,7 @@ export function Navbar() {
   };
 
   return (
-    <nav className="nav-shell" aria-label="Main">
+    <nav className="nav-shell" aria-label={t("Main", "Principal")}>
       <div className="container-sj flex items-center justify-between py-4">
         <a href="/#home" onClick={(e) => { e.preventDefault(); go("home"); }} className="flex items-center shrink-0">
           <img src="/logo.png" alt="Salah Junior Dev" width={42} height={42} decoding="async" className="site-logo md:w-14 md:h-14" />
@@ -66,8 +66,7 @@ export function Navbar() {
             <span className={`lang-seg ${lang === "en" ? "active" : ""}`}>EN</span>
             <span className={`lang-seg ${lang === "fr" ? "active" : ""}`}>FR</span>
           </button>
-          <button
-            aria-label="Toggle menu"
+          <button aria-label={t("Toggle menu", "Ouvrir le menu")}
             onClick={() => setOpen(!open)}
             className="md:hidden flex flex-col gap-1.5 p-2 bg-[#07101f] rounded-lg"
           >

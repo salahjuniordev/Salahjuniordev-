@@ -2,11 +2,19 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
+import { LanguageProvider, useLanguage } from "@/lib/language";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/auth")({ component: AuthPage });
+export const Route = createFileRoute("/auth")({
+  component: () => (
+    <LanguageProvider>
+      <AuthPage />
+    </LanguageProvider>
+  ),
+});
 
 function AuthPage() {
+  const { t } = useLanguage();
   const nav = useNavigate();
   const { session, isAdmin, loading } = useAuth();
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -29,16 +37,16 @@ function AuthPage() {
           options: { emailRedirectTo: `${window.location.origin}/admin` },
         });
         if (error) throw error;
-        toast.success("Account created. You can sign in now.");
+        toast.success(t("Account created. You can sign in now.", "Compte créé. Vous pouvez vous connecter."));
         setMode("login");
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        toast.success("Welcome back");
+        toast.success(t("Welcome back", "Bon retour"));
         nav({ to: "/admin" });
       }
     } catch (err: any) {
-      toast.error(err.message ?? "Something went wrong");
+      toast.error(err.message ?? t("Something went wrong", "Une erreur est survenue"));
     } finally {
       setBusy(false);
     }
@@ -54,7 +62,7 @@ function AuthPage() {
       />
       <div className="relative w-full max-w-md">
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white mb-6">
-          <i className="fa-solid fa-arrow-left" /> Back to site
+          <i className="fa-solid fa-arrow-left" /> {t("Back to site", "Retour au site")}
         </Link>
         <div className="card-dark !p-8 backdrop-blur-xl border-white/10">
           <div className="text-center mb-8">
@@ -62,12 +70,12 @@ function AuthPage() {
               SJ
             </div>
             <h1 className="text-2xl font-bold text-white">
-              {mode === "login" ? "Admin Sign In" : "Create Admin Account"}
+              {mode === "login" ? t("Admin Sign In", "Connexion Admin") : t("Create Admin Account", "Créer un Compte Admin")}
             </h1>
             <p className="text-sm text-slate-400 mt-1">
               {mode === "login"
-                ? "Access your dashboard"
-                : "Use your registered admin email"}
+                ? t("Access your dashboard", "Accédez à votre tableau de bord")
+                : t("Use your registered admin email", "Utilisez votre email admin enregistré")}
             </p>
           </div>
 
@@ -105,9 +113,9 @@ function AuthPage() {
               {busy ? (
                 <i className="fa-solid fa-spinner fa-spin" />
               ) : mode === "login" ? (
-                <>Sign In <i className="fa-solid fa-arrow-right" /></>
+                <>{t("Sign In", "Se Connecter")} <i className="fa-solid fa-arrow-right" /></>
               ) : (
-                <>Create Account <i className="fa-solid fa-user-plus" /></>
+                <>{t("Create Account", "Créer un Compte")} <i className="fa-solid fa-user-plus" /></>
               )}
             </button>
           </form>
@@ -115,16 +123,16 @@ function AuthPage() {
           <div className="mt-6 text-center text-sm text-slate-400">
             {mode === "login" ? (
               <>
-                No account?{" "}
+                {t("No account?", "Pas de compte ?")}{" "}
                 <button onClick={() => setMode("signup")} className="text-[var(--brand)] hover:underline">
-                  Sign up
+                  {t("Sign up", "S'inscrire")}
                 </button>
               </>
             ) : (
               <>
-                Already have an account?{" "}
+                {t("Already have an account?", "Vous avez déjà un compte ?")}{" "}
                 <button onClick={() => setMode("login")} className="text-[var(--brand)] hover:underline">
-                  Sign in
+                  {t("Sign in", "Se connecter")}
                 </button>
               </>
             )}

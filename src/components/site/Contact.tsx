@@ -14,7 +14,7 @@ export function Contact() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hello Salah, my name is ${form.name} (${form.email}).%0A%0ATopic: ${form.topic}%0A%0A${form.message}`;
+    const text = `${t("Hello Salah, my name is", "Bonjour Salah, je m'appelle")} ${form.name} (${form.email}).%0A%0A${t("Topic:", "Sujet :")} ${form.topic}%0A%0A${form.message}`;
     window.open(`https://wa.me/237683693011?text=${text}`, "_blank");
   };
 

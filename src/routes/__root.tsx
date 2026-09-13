@@ -12,26 +12,31 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/lib/auth";
+import { LanguageProvider, useLanguage } from "@/lib/language";
 import { Toaster } from "@/components/ui/sonner";
 import { asJsonLdScript, organizationSchema, websiteSchema, DEFAULT_OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT, OG_IMAGE_TYPE } from "@/lib/seo-schemas";
 
 function NotFoundComponent() {
+  const { t } = useLanguage();
   return (
     <div className="notfound-page">
       <div className="max-w-md">
         <div className="notfound-code">404</div>
-        <h1 className="notfound-title">Page not found</h1>
+        <h1 className="notfound-title">{t("Page not found", "Page introuvable")}</h1>
         <p className="notfound-sub">
-          The page you're looking for doesn't exist or has been moved.
+          {t(
+            "The page you're looking for doesn't exist or has been moved.",
+            "La page que vous cherchez n'existe pas ou a été déplacée.",
+          )}
         </p>
         <div className="notfound-actions">
           <Link to="/" className="notfound-btn notfound-btn-primary">
             <i className="fa-solid fa-house" />
-            Back home
+            {t("Back home", "Retour à l'accueil")}
           </Link>
           <a href="/#services" className="notfound-btn notfound-btn-ghost">
             <i className="fa-solid fa-screwdriver-wrench" />
-            Explore services
+            {t("Explore services", "Voir les services")}
           </a>
         </div>
       </div>
@@ -39,8 +44,9 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorBoundary({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
+  const { t } = useLanguage();
   const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
@@ -50,10 +56,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          {t("This page didn't load", "Cette page n'a pas pu se charger")}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          {t(
+            "Something went wrong on our end. You can try refreshing or head back home.",
+            "Une erreur est survenue. Vous pouvez actualiser la page ou revenir à l'accueil.",
+          )}
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -63,13 +72,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            {t("Try again", "Réessayer")}
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            {t("Go home", "Retour à l'accueil")}
           </a>
         </div>
       </div>
@@ -117,8 +126,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   }),
   shellComponent: RootShell,
   component: RootComponent,
-  notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
+  notFoundComponent: () => (
+    <LanguageProvider>
+      <NotFoundComponent />
+    </LanguageProvider>
+  ),
+  errorComponent: (props) => (
+    <LanguageProvider>
+      <ErrorBoundary {...props} />
+    </LanguageProvider>
+  ),
 });
 
 function RootShell({ children }: { children: ReactNode }) {

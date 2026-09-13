@@ -208,7 +208,7 @@ export function Hero() {
 
 
 
-      <nav className={`hero-v2-social ${started ? "is-in" : ""}`} aria-label="Social profiles">
+      <nav className={`hero-v2-social ${started ? "is-in" : ""}`} aria-label={t("Social profiles", "Profils sociaux")}>
         {socials.map((s, i) => (
           <a
             key={s.i}
