@@ -3,7 +3,7 @@ import { useLanguage } from "@/lib/language";
 import { supabase } from "@/integrations/supabase/client";
 
 /** Fallbacks shown until/unless the admin uploads hero images in the dashboard. */
-const DEFAULT_DESKTOP = ["/hero-portrait.png", "hero-portrait-2.png"];
+const DEFAULT_DESKTOP = ["/hero-portrait.png", "/hero-portrait-2.png"];
 const DEFAULT_MOBILE = ["/hero-mobile-1.webp", "/hero-mobile-2.webp"];
 
 /** Row shape of the admin-managed hero_images table. */
@@ -58,20 +58,14 @@ export function Hero() {
     })();
   }, []);
 
-  const images = useMemo(
-    () =>
-      dbImages.length
-        ? dbImages.filter((d) => d.device !== "mobile").map((d) => d.url)
-        : DEFAULT_DESKTOP,
-    [dbImages],
-  );
-  const mobilePortraits = useMemo(
-    () =>
-      dbImages.length
-        ? dbImages.filter((d) => d.device !== "desktop").map((d) => d.url)
-        : DEFAULT_MOBILE,
-    [dbImages],
-  );
+  const images = useMemo(() => {
+    const desktop = dbImages.filter((d) => d.device !== "mobile").map((d) => d.url);
+    return desktop.length ? desktop : DEFAULT_DESKTOP;
+  }, [dbImages]);
+  const mobilePortraits = useMemo(() => {
+    const mobile = dbImages.filter((d) => d.device !== "desktop").map((d) => d.url);
+    return mobile.length ? mobile : DEFAULT_MOBILE;
+  }, [dbImages]);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
