@@ -11,7 +11,7 @@ export function Numbers() {
   const { t } = useLanguage();
   return (
     <section className="numbers-bg" style={{
-      backgroundImage: "linear-gradient(rgba(15,23,42,0.92), rgba(15,23,42,0.92)), url('/img/dots.png')",
+      backgroundImage: "linear-gradient(rgba(7,16,31,0.92), rgba(7,16,31,0.92)), url('/img/dots.png')",
     }}>
       <div className="container-sj">
         <h2 className="text-center text-2xl md:text-3xl font-bold text-white mb-10">

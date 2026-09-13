@@ -36,7 +36,7 @@ function ActivityAdmin() {
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="bg-[#0a1120] border border-white/10 rounded-lg px-3 py-2 text-sm text-slate-200"
+          className="bg-[#07101f] border border-white/10 rounded-lg px-3 py-2 text-sm text-slate-200"
         >
           <option value="all">All actions</option>
           <option value="create">Create</option>
@@ -45,7 +45,7 @@ function ActivityAdmin() {
         </select>
       }
     >
-      <div className="rounded-2xl bg-[#0a1120] border border-white/5 overflow-hidden">
+      <div className="rounded-2xl bg-[#07101f] border border-white/5 overflow-hidden">
         {loading ? (
           <div className="p-8 text-center text-slate-400">
             <i className="fa-solid fa-spinner fa-spin mr-2" />Loading…

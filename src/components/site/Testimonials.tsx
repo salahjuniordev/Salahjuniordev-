@@ -14,7 +14,7 @@ function Stars({ n }: { n: number }) {
   );
 }
 
-const palette = ["#0369a1", "#9d174d", "#046c4e", "#5b21b6", "#92400e", "#991b1b"];
+const palette = ["#12203a", "#0b3a2a", "#2a1a3a", "#3a2a0b", "#3a0b0b", "#1a2a3a"];
 
 export function Testimonials({ initial }: { initial?: Tables<"testimonials">[] }) {
   const { t } = useLanguage();
@@ -43,7 +43,7 @@ export function Testimonials({ initial }: { initial?: Tables<"testimonials">[] }
   const bg = palette[i % palette.length];
 
   return (
-    <section id="testimonials" className="section-padding bg-[#070d1a]">
+    <section id="testimonials" className="section-padding bg-[#05090f]">
       <div className="container-sj">
         <div className="sec-head text-center mb-14">
           <p className="eyebrow">{t("Reviews", "Avis")}</p>

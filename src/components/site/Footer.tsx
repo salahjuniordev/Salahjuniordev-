@@ -37,7 +37,7 @@ export function Footer() {
     { i: "fa-youtube", url: s?.social_youtube },
   ].filter((x) => x.url) as { i: string; url: string }[];
   return (
-    <footer className="bg-[#070d1a] pt-20 pb-8 border-t border-white/5">
+    <footer className="bg-[#05090f] pt-20 pb-8 border-t border-white/5">
       {/* Organization / WebSite JSON-LD is emitted sitewide from __root head() */}
 
       <div className="container-sj grid lg:grid-cols-3 gap-10">

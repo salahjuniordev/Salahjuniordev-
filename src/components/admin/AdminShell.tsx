@@ -25,7 +25,7 @@ export function AdminShell({ title, subtitle, actions, children }: {
     <div className="min-h-screen bg-[var(--ink)] text-slate-200 flex">
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 h-screen w-64 z-40 bg-[#0a1120] border-r border-white/5 flex flex-col transition-transform ${
+        className={`fixed lg:sticky top-0 left-0 h-screen w-64 z-40 bg-[#07101f] border-r border-white/5 flex flex-col transition-transform ${
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -48,7 +48,7 @@ export function AdminShell({ title, subtitle, actions, children }: {
                 onClick={() => setOpen(false)}
                 className={`group flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   active
-                    ? "bg-[var(--brand)]/15 text-[var(--brand)] shadow-[inset_0_0_0_1px_rgba(14,165,233,0.25)]"
+                    ? "bg-[var(--brand)]/15 text-[var(--brand)] shadow-[inset_0_0_0_1px_rgba(155,250,6,0.3)]"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >

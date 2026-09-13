@@ -16,7 +16,7 @@ export function FormModal({
       <form
         onSubmit={onSubmit}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col rounded-2xl bg-[#0f172a] border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.6)]"
+        className="w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col rounded-2xl bg-[#0b1626] border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.6)]"
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
           <h3 className="text-lg font-bold text-white">{title}</h3>
@@ -47,4 +47,4 @@ export function Field({ label, children, hint }: { label: string; children: Reac
 }
 
 export const inputCls =
-  "w-full bg-[#0a1120] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[var(--brand)] transition-colors";
+  "w-full bg-[#07101f] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[var(--brand)] transition-colors";

@@ -37,7 +37,7 @@ export function RichEditor({ value, onChange }: { value: string; onChange: (v: s
   };
 
   return (
-    <div className="border border-white/10 rounded-lg overflow-hidden bg-[#0a1120]">
+    <div className="border border-white/10 rounded-lg overflow-hidden bg-[#07101f]">
       <div className="flex flex-wrap gap-1 px-2 py-2 border-b border-white/10 bg-white/[0.02]">
         {tools.map((t, i) => (
           <button

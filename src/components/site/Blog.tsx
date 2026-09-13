@@ -21,7 +21,7 @@ export function Blog({ initial }: { initial?: Tables<"blog_posts">[] }) {
   }, [initial]);
 
   return (
-    <section id="blog" className="section-padding bg-[#0a1120]">
+    <section id="blog" className="section-padding bg-[#07101f]">
       <div className="container-sj">
         <div className="sec-head text-center mb-14">
           <p className="eyebrow">{t("Blog", "Blog")}</p>

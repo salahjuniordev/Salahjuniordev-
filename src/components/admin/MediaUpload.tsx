@@ -86,7 +86,7 @@ export function MediaUpload({
         placeholder="Or paste an external URL"
         value={value ?? ""}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-[#0a1120] border border-white/10 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-[var(--brand)]"
+        className="w-full bg-[#07101f] border border-white/10 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-[var(--brand)]"
       />
     </div>
   );

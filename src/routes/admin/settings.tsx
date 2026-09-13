@@ -203,7 +203,7 @@ function SettingsAdmin() {
 
 function Section({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl bg-[#0a1120] border border-white/5 p-6 space-y-4">
+    <section className="rounded-2xl bg-[#07101f] border border-white/5 p-6 space-y-4">
       <h3 className="text-white font-semibold flex items-center gap-2">
         <i className={`fa-solid ${icon} text-[var(--brand)]`} />
         {title}

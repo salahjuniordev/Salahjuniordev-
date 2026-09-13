@@ -13,9 +13,9 @@ export function ClientsMarquee() {
   const doubled = [...clients, ...clients, ...clients];
 
   return (
-    <section className="py-20 bg-white overflow-hidden border-y border-slate-100">
+    <section className="py-20 bg-[#0b1626] overflow-hidden border-y border-white/5">
       <div className="container px-4 mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
           {lang === "en" ? "Some of our clients" : "Quelques-uns de nos clients"}
         </h2>
       </div>

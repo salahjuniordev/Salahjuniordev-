@@ -175,7 +175,7 @@ function BlogPostPage() {
         .prose-blog a { color: var(--brand); text-decoration: underline; }
         .prose-blog blockquote { border-left: 3px solid var(--brand); padding-left: 1rem; color: #cbd5e1; font-style: italic; margin: 1rem 0; }
         .prose-blog img { max-width: 100%; border-radius: 12px; margin: 1rem 0; }
-        .prose-blog code { background: rgba(14,165,233,0.15); color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+        .prose-blog code { background: rgba(155,250,6,0.12); color: var(--brand); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
       `}</style>
     </>
 

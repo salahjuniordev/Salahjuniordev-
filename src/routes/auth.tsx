@@ -49,7 +49,7 @@ function AuthPage() {
       <div className="absolute inset-0 pointer-events-none opacity-40"
         style={{
           background:
-            "radial-gradient(600px circle at 20% 20%, rgba(14,165,233,0.18), transparent 60%), radial-gradient(500px circle at 80% 80%, rgba(2,132,199,0.15), transparent 60%)",
+            "radial-gradient(600px circle at 20% 20%, rgba(155,250,6,0.12), transparent 60%), radial-gradient(500px circle at 80% 80%, rgba(155,250,6,0.08), transparent 60%)",
         }}
       />
       <div className="relative w-full max-w-md">
@@ -58,7 +58,7 @@ function AuthPage() {
         </Link>
         <div className="card-dark !p-8 backdrop-blur-xl border-white/10">
           <div className="text-center mb-8">
-            <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--brand)] text-white text-xl font-bold shadow-[0_10px_40px_rgba(14,165,233,0.4)] mb-4">
+            <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--brand)] text-[var(--ink)] text-xl font-bold shadow-[0_10px_40px_rgba(155,250,6,0.35)] mb-4">
               SJ
             </div>
             <h1 className="text-2xl font-bold text-white">

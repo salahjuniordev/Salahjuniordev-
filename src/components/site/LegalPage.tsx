@@ -10,7 +10,7 @@ export function LegalLayout({ title, subtitle, updated, children }: { title: str
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <header className="pt-32 pb-12 bg-[#0a1120]">
+      <header className="pt-32 pb-12 bg-[#07101f]">
         <div className="container-sj text-center">
           <nav aria-label="Breadcrumb" className="text-xs text-slate-400 mb-4">
             <Link to="/" className="hover:text-[--brand]">{t("Home", "Accueil")}</Link> <span className="mx-2">›</span> <span className="text-[--brand]">{title}</span>
