@@ -67,6 +67,15 @@ function ProjectsAdmin() {
             <Field label="Project URL">
               <input className={inputCls} value={editing.link_url ?? ""} onChange={(e) => setEditing({ ...editing, link_url: e.target.value })} />
             </Field>
+            <Field label="Case Study (HTML — creates a detail page at /projects/slug)">
+              <textarea
+                rows={6}
+                className={inputCls}
+                placeholder={"<h2>The Problem</h2>\n<p>…</p>\n<h2>What I Built</h2>\n<p>…</p>"}
+                value={(editing as any).case_study ?? ""}
+                onChange={(e) => setEditing({ ...editing, case_study: e.target.value } as any)}
+              />
+            </Field>
             <div className="grid sm:grid-cols-2 gap-4 items-end">
               <Field label="Order"><input type="number" className={inputCls} value={editing.order_index ?? 0} onChange={(e) => setEditing({ ...editing, order_index: Number(e.target.value) })} /></Field>
               <label className="inline-flex items-center gap-2 text-sm text-slate-300 pb-2.5">

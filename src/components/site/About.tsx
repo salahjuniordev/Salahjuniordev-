@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/language";
+import { supabase } from "@/integrations/supabase/client";
 
 const portrait1 = "/assets/hero/hero-mobile-1.webp";
 const portrait2 = "/assets/hero/hero-mobile-2.webp";
@@ -12,6 +14,22 @@ const interests = [
 
 export function About() {
   const { t } = useLanguage();
+  // Optional intro video, managed from Admin → Platform Settings.
+  const [introVideo, setIntroVideo] = useState<string | null>(null);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await (supabase.from("site_settings" as any) as any)
+          .select("intro_video_url")
+          .limit(1)
+          .maybeSingle();
+        if (data?.intro_video_url) setIntroVideo(data.intro_video_url);
+      } catch {
+        /* column may not exist yet */
+      }
+    })();
+  }, []);
+
   return (
     <section id="about" className="about-section">
       <div className="about-dots-tl" aria-hidden />
@@ -97,6 +115,13 @@ export function About() {
             ))}
           </div>
         </div>
+
+        {introVideo && (
+          <div className="about-intro-video">
+            <video src={introVideo} controls preload="metadata" playsInline />
+            <p className="about-intro-caption">{t("Watch my 60-second intro", "Regardez mon intro en 60 secondes")}</p>
+          </div>
+        )}
       </div>
     </section>
   );

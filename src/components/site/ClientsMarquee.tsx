@@ -1,11 +1,11 @@
 import { useLanguage } from "@/lib/language";
 
 const clients = [
-  { name: "L'Ours Blanc", logo: "/assets/clients/logo-ours-blanc.png" },
-  { name: "K Bou Fitness Club", logo: "/assets/clients/logo-kbou.jpg" },
-  { name: "Mario Digital Store", logo: "/assets/clients/logo-mario.png" },
-  { name: "Coach Junior", logo: "/assets/clients/logo-coach-junior.png" },
-  { name: "Maney", logo: "/assets/clients/logo-maney.png" },
+  { name: "L'Ours Blanc", logo: "/assets/clients/logo-ours-blanc.png", url: "" },
+  { name: "K Bou Fitness Club", logo: "/assets/clients/logo-kbou.jpg", url: "" },
+  { name: "Mario Digital Store", logo: "/assets/clients/logo-mario.png", url: "" },
+  { name: "Coach Junior", logo: "/assets/clients/logo-coach-junior.png", url: "" },
+  { name: "Maney", logo: "/assets/clients/logo-maney.png", url: "" },
 ];
 
 export function ClientsMarquee() {
@@ -23,8 +23,12 @@ export function ClientsMarquee() {
       <div className="relative flex w-full overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap py-4">
           {doubled.map((client, i) => (
-            <div
+            <a
               key={i}
+              href={client.url || undefined}
+              target={client.url ? "_blank" : undefined}
+              rel={client.url ? "noreferrer" : undefined}
+              title={client.name}
               className="flex items-center justify-center mx-8 md:mx-16 w-32 md:w-48 grayscale hover:grayscale-0 transition-all duration-300"
             >
               <img
@@ -34,7 +38,7 @@ export function ClientsMarquee() {
                 className="max-h-16 md:max-h-24 w-auto object-contain"
                 loading="lazy"
               />
-            </div>
+            </a>
           ))}
         </div>
       </div>

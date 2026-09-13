@@ -123,6 +123,33 @@ function SettingsAdmin() {
               onChange={(e) => set("about_text", e.target.value)}
             />
           </Field>
+          <div className="rounded-xl border border-[rgba(155,250,6,0.25)] bg-[rgba(155,250,6,0.06)] p-4 space-y-4">
+            <label className="inline-flex items-center gap-2 text-sm text-slate-200">
+              <input
+                type="checkbox"
+                checked={!!(s as any).availability_live}
+                onChange={(e) => set("availability_live" as any, e.target.checked)}
+                className="accent-[var(--brand)]"
+              />
+              <i className="fa-solid fa-circle-dot text-[var(--brand)]" />
+              Show availability badge in hero
+            </label>
+            <Field label="Availability text (e.g. “Available for projects — booking June”)">
+              <input
+                className={inputCls}
+                value={(s as any).availability_text ?? ""}
+                onChange={(e) => set("availability_text" as any, e.target.value)}
+              />
+            </Field>
+          </div>
+          <Field label="Intro video (shown in About section — MP4/WebM upload)">
+            <MediaUpload
+              value={(s as any).intro_video_url}
+              onChange={(url) => set("intro_video_url" as any, url)}
+              accept="video/*"
+              label="Upload intro video"
+            />
+          </Field>
         </Section>
 
         <Section title="Contact" icon="fa-envelope">

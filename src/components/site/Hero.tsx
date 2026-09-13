@@ -9,6 +9,9 @@ const DEFAULT_MOBILE = ["/hero-mobile-1.webp", "/hero-mobile-2.webp"];
 /** Row shape of the admin-managed hero_images table. */
 type HeroImage = { id: string; url: string; device: "desktop" | "mobile" | "both" };
 
+/** Availability pill, editable from Admin → Platform Settings. */
+type Availability = { text: string; live: boolean } | null;
+
 /** Types out `text` one character at a time once `start` is true. */
 function useTyped(text: string, start: boolean, speed = 55) {
   const [n, setN] = useState(0);
@@ -67,6 +70,24 @@ export function Hero() {
     return mobile.length ? mobile : DEFAULT_MOBILE;
   }, [dbImages]);
 
+  // Availability badge (site_settings) — create urgency, pre-qualify leads.
+  const [availability, setAvailability] = useState<Availability>(null);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await (supabase.from("site_settings" as any) as any)
+          .select("availability_text,availability_live")
+          .limit(1)
+          .maybeSingle();
+        if (data?.availability_live && data?.availability_text) {
+          setAvailability({ text: data.availability_text, live: true });
+        }
+      } catch {
+        /* column/table may not exist yet — badge simply doesn't render */
+      }
+    })();
+  }, []);
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -104,6 +125,12 @@ export function Hero() {
 
       <div className="hero-v2-inner">
         <div className="hero-v2-copy">
+          {availability && (
+            <p className="hero-avail">
+              <span className="hero-avail-dot" aria-hidden />
+              {availability.text}
+            </p>
+          )}
           <p className="hero-v2-hello">
             {g.shown}
             {!g.done && <span className="typed-cursor" />}

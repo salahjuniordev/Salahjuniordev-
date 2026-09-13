@@ -7,6 +7,7 @@ import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
+import { useSeo } from "@/lib/use-seo";
 
 type Service = Tables<"services">;
 
@@ -38,6 +39,19 @@ function ServiceDetailPage() {
   const { t } = useLanguage();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+
+  useSeo({
+    title: {
+      en: service ? `${service.title} | Salah Junior` : "Service | Salah Junior",
+      fr: service ? `${service.title} | Salah Junior` : "Service | Salah Junior",
+    },
+    description: {
+      en: service?.description || "Service by Salah Junior, full-stack web developer in Yaoundé, Cameroon.",
+      fr: service?.description || "Service de Salah Junior, développeur web full-stack à Yaoundé, Cameroun.",
+    },
+    path: `/services/${service?.id ?? ""}`,
+    image: service?.image_url ?? undefined,
+  });
 
   if (!service) {
     throw notFound();

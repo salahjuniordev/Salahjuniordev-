@@ -11,6 +11,9 @@ import { Numbers } from "@/components/site/Numbers";
 import { Portfolio } from "@/components/site/Portfolio";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Blog } from "@/components/site/Blog";
+import { Process } from "@/components/site/Process";
+import { Newsletter } from "@/components/site/Newsletter";
+import { QuoteWizard } from "@/components/site/QuoteWizard";
 import { Ebooks } from "@/components/site/Ebooks";
 import { Pricing } from "@/components/site/Pricing";
 import { Contact } from "@/components/site/Contact";
@@ -74,6 +77,7 @@ function IndexInner() {
         <ToolsMarquee />
         <Services initial={data?.services} />
         <ClientsMarquee />
+        <Process />
         <Numbers />
         <Portfolio initial={data?.projects} />
         <Testimonials initial={data?.testimonials} />
@@ -81,10 +85,12 @@ function IndexInner() {
         <Ebooks />
         <Pricing initial={data?.pricing} />
         <Contact />
+        <Newsletter />
       </main>
       <Footer />
       <BackToTop />
       <WhatsAppFloat />
+      <QuoteWizard />
     </>
   );
 }

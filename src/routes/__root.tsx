@@ -17,20 +17,22 @@ import { asJsonLdScript, organizationSchema, websiteSchema, DEFAULT_OG_IMAGE, OG
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
+    <div className="notfound-page">
+      <div className="max-w-md">
+        <div className="notfound-code">404</div>
+        <h1 className="notfound-title">Page not found</h1>
+        <p className="notfound-sub">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
+        <div className="notfound-actions">
+          <Link to="/" className="notfound-btn notfound-btn-primary">
+            <i className="fa-solid fa-house" />
+            Back home
           </Link>
+          <a href="/#services" className="notfound-btn notfound-btn-ghost">
+            <i className="fa-solid fa-screwdriver-wrench" />
+            Explore services
+          </a>
         </div>
       </div>
     </div>
@@ -83,6 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Salah Junior | Full-Stack Web Developer & UI/UX Designer – Yaoundé, Cameroon" },
       { name: "description", content: "Full-Stack Web Developer and UI/UX Designer based in Yaoundé, Cameroon. Turning ideas into digital reality." },
       { name: "author", content: "Salah Junior Ncham" },
+      { name: "theme-color", content: "#07101f" },
       { property: "og:type", content: "website" },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
       { property: "og:image:width", content: String(OG_IMAGE_WIDTH) },
@@ -97,6 +100,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
       // Warm up the third-party origins the page pulls assets from.
       { rel: "preconnect", href: "https://res.cloudinary.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://cdnjs.cloudflare.com", crossOrigin: "anonymous" },

@@ -8,6 +8,8 @@ import { optimizedImage } from "@/lib/img";
 export function Blog({ initial }: { initial?: Tables<"blog_posts">[] }) {
   const { t } = useLanguage();
   const [posts, setPosts] = useState<Tables<"blog_posts">[]>(initial ?? []);
+  const [query, setQuery] = useState("");
+  const [tag, setTag] = useState<string | null>(null);
 
   useEffect(() => {
     if (initial) return;
@@ -20,6 +22,15 @@ export function Blog({ initial }: { initial?: Tables<"blog_posts">[] }) {
       .then(({ data }) => setPosts(data ?? []));
   }, [initial]);
 
+  const tags = Array.from(new Set(posts.map((p) => p.tag).filter((x): x is string => !!x)));
+  const normalized = (s: string) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const visible = posts.filter((p) => {
+    if (tag && p.tag !== tag) return false;
+    if (!query.trim()) return true;
+    const q = normalized(query.trim());
+    return normalized(`${p.title} ${p.excerpt ?? ""} ${p.tag ?? ""}`).includes(q);
+  });
+
   return (
     <section id="blog" className="section-padding bg-[#07101f]">
       <div className="container-sj">
@@ -29,13 +40,48 @@ export function Blog({ initial }: { initial?: Tables<"blog_posts">[] }) {
           <div className="underline" />
           <p>{t("Thoughts on dev, design, and building products in Africa", "Réflexions sur le dev, le design et la construction de produits en Afrique")}</p>
         </div>
+
+        {/* Search + tag filter */}
+        {posts.length > 0 && (
+          <div className="blog-filter mb-10">
+            <div className="blog-filter-search">
+              <i className="fa-solid fa-magnifying-glass" />
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t("Search articles…", "Rechercher des articles…")}
+                aria-label={t("Search articles", "Rechercher des articles")}
+              />
+            </div>
+            {tags.length > 0 && (
+              <div className="blog-filter-tags">
+                <button className={`blog-tag ${tag === null ? "on" : ""}`} onClick={() => setTag(null)}>
+                  {t("All", "Tous")}
+                </button>
+                {tags.map((x) => (
+                  <button key={x} className={`blog-tag ${tag === x ? "on" : ""}`} onClick={() => setTag(tag === x ? null : x)}>
+                    {x}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((p) => {
-            const date = p.published_at
+          {visible.length === 0 ? (
+            <div className="col-span-full py-14 text-center text-slate-400">
+              <i className="fa-solid fa-magnifying-glass text-3xl mb-4 text-slate-600" />
+              <p>{t("No articles match your search.", "Aucun article ne correspond à votre recherche.")}</p>
+            </div>
+          ) : (
+            visible.map((p) => {
+              const date = p.published_at
               ? new Date(p.published_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
               : "";
-            return (
-              <article key={p.id} className="card-dark !p-0 overflow-hidden flex flex-col">
+              return (
+                <article key={p.id} className="card-dark !p-0 overflow-hidden flex flex-col">
                 {p.cover_image_url && (
                   <img
                     src={optimizedImage(p.cover_image_url, 640)}
@@ -60,8 +106,9 @@ export function Blog({ initial }: { initial?: Tables<"blog_posts">[] }) {
                   </Link>
                 </div>
               </article>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
     </section>

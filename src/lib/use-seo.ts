@@ -6,6 +6,7 @@ type SeoInput = {
   title: { en: string; fr: string };
   description: { en: string; fr: string };
   path?: string; // pathname portion for canonical / hreflang
+  image?: string; // absolute or root-relative URL for og:image / twitter:image
 };
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
@@ -34,7 +35,7 @@ function upsertLink(rel: string, href: string, hreflang?: string) {
   el.setAttribute("href", href);
 }
 
-export function useSeo({ title, description, path }: SeoInput) {
+export function useSeo({ title, description, path, image }: SeoInput) {
   const { lang } = useLanguage();
   useEffect(() => {
     const t = lang === "fr" ? title.fr : title.en;
@@ -51,10 +52,15 @@ export function useSeo({ title, description, path }: SeoInput) {
     const origin = SITE_ORIGIN;
     const p = path ?? window.location.pathname;
     const url = `${origin}${p}`;
+    if (image) {
+      const img = image.startsWith("http") ? image : `${origin}${image}`;
+      upsertMeta("property", "og:image", img);
+      upsertMeta("name", "twitter:image", img);
+    }
     upsertLink("canonical", url);
     upsertMeta("property", "og:url", url);
     // NOTE: hreflang alternate links are owned by the server-rendered head() (with
     // correct ?lang= URLs). We intentionally do NOT touch them here — overwriting them
     // with bare, language-less URLs was collapsing all locales onto one URL after hydration.
-  }, [lang, title.en, title.fr, description.en, description.fr, path]);
+  }, [lang, title.en, title.fr, description.en, description.fr, path, image]);
 }
