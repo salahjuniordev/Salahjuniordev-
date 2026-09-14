@@ -92,6 +92,96 @@ export type Database = {
         }
         Relationships: []
       }
+      ebooks: {
+        Row: {
+          badge: string | null
+          buy_url: string
+          cover_url: string | null
+          created_at: string
+          currency: string
+          description: string
+          id: string
+          order_index: number
+          price: string
+          published: boolean
+          title: string
+        }
+        Insert: {
+          badge?: string | null
+          buy_url: string
+          cover_url?: string | null
+          created_at?: string
+          currency?: string
+          description?: string
+          id?: string
+          order_index?: number
+          price?: string
+          published?: boolean
+          title: string
+        }
+        Update: {
+          badge?: string | null
+          buy_url?: string
+          cover_url?: string | null
+          created_at?: string
+          currency?: string
+          description?: string
+          id?: string
+          order_index?: number
+          price?: string
+          published?: boolean
+          title?: string
+        }
+        Relationships: []
+      }
+      hero_images: {
+        Row: {
+          active: boolean
+          created_at: string
+          device: string
+          id: string
+          image_url: string
+          order_index: number
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          device?: string
+          id?: string
+          image_url: string
+          order_index?: number
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          device?: string
+          id?: string
+          image_url?: string
+          order_index?: number
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          source: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          source?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          source?: string
+        }
+        Relationships: []
+      }
       pricing_tiers: {
         Row: {
           created_at: string
@@ -136,6 +226,7 @@ export type Database = {
       }
       projects: {
         Row: {
+          case_study: string | null
           category: string
           created_at: string
           description: string
@@ -149,6 +240,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          case_study?: string | null
           category?: string
           created_at?: string
           description?: string
@@ -162,6 +254,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          case_study?: string | null
           category?: string
           created_at?: string
           description?: string
@@ -215,6 +308,8 @@ export type Database = {
       site_settings: {
         Row: {
           about_text: string | null
+          availability_live: boolean
+          availability_text: string | null
           brand_name: string
           contact_email: string | null
           contact_phone: string | null
@@ -224,6 +319,7 @@ export type Database = {
           hero_subtitle: string | null
           hero_title: string | null
           id: string
+          intro_video_url: string | null
           location: string | null
           logo_url: string | null
           resume_url: string | null
@@ -239,6 +335,8 @@ export type Database = {
         }
         Insert: {
           about_text?: string | null
+          availability_live?: boolean
+          availability_text?: string | null
           brand_name?: string
           contact_email?: string | null
           contact_phone?: string | null
@@ -248,6 +346,7 @@ export type Database = {
           hero_subtitle?: string | null
           hero_title?: string | null
           id?: string
+          intro_video_url?: string | null
           location?: string | null
           logo_url?: string | null
           resume_url?: string | null
@@ -263,6 +362,8 @@ export type Database = {
         }
         Update: {
           about_text?: string | null
+          availability_live?: boolean
+          availability_text?: string | null
           brand_name?: string
           contact_email?: string | null
           contact_phone?: string | null
@@ -272,6 +373,7 @@ export type Database = {
           hero_subtitle?: string | null
           hero_title?: string | null
           id?: string
+          intro_video_url?: string | null
           location?: string | null
           logo_url?: string | null
           resume_url?: string | null
